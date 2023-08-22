@@ -1,0 +1,49 @@
+# General Spring config
+spring:
+  application:
+    name: gatewayserver
+  config:
+    import: optional:configserver:http://localhost:8085
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true # For Eureka
+          lowerCaseServiceId: true
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://localhost:8181/realms/booking/protocol/openid-connect/certs # Keycloak used certs
+
+# Actuator
+info:
+  app:
+    name: Gateway Server microservice
+    description: Common API Gateway for microservices
+    version: 1.0.0
+
+management:
+  endpoint:
+    gateway:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  info:
+    env:
+      enabled: true
+  # Zipkin config
+  tracing:
+    sampling:
+      probability: 1.0
+  zipkin:
+    tracing:
+      endpoint: http://localhost:9411/api/v2/spans
+
+# Slf4j config
+logging:
+  pattern:
+    level: "%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]"
+
