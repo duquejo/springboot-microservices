@@ -47,6 +47,9 @@ You must be logged in into dockerhub first. (Replace {} with the docker image na
 docker push docker.io/{docker-image-name}
 ```
 
+### General config server configuration
+- https://github.com/duquejo01/hotels-ms-configserver
+
 ### Traceability
 We could use the following Spring Cloud Tools, __Sleuth__ and __Zipkin__.
 
